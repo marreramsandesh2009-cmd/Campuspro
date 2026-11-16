@@ -39,7 +39,7 @@ A responsive academic project workspace built with **HTML, CSS, Bootstrap Icons,
    ```
 7. Edit `.env` and set your database connection. Example for XAMPP with an empty root password:
    ```env
-   SECRET_KEY=replace-with-a-long-random-value
+   SECRET_KEY=it_is_a_campus_pro_project_full_stack_using_python
    DATABASE_URL=mysql+pymysql://root:@127.0.0.1:3306/campuspro?charset=utf8mb4
    ```
    If your MySQL root user has a password, put it after `root:`. If you want to test without MySQL first, keep `DATABASE_URL=sqlite:///campuspro.db`.
