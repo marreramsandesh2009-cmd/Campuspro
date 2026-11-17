@@ -1,20 +1,27 @@
 
 import os
 from dotenv import load_dotenv
+from sqlalchemy.engine import URL
 
 load_dotenv()
 
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'development-key-change-before-deployment')
+    SECRET_KEY = os.environ['SECRET_KEY']
 
-    SQLALCHEMY_DATABASE_URI = (
-        f"mysql+pymysql://{os.getenv('DB_USER', 'root')}:"
-        f"{os.getenv('DB_PASSWORD', '')}@"
-        f"{os.getenv('DB_HOST', 'localhost')}:"
-        f"{os.getenv('DB_PORT', '3306')}/"
-        f"{os.getenv('DB_NAME', 'campuspro')}"
+    SQLALCHEMY_DATABASE_URI = URL.create(
+        drivername='mysql+pymysql',
+        username=os.environ['DB_USER'],
+        password=os.environ['DB_PASSWORD'],
+        host=os.environ['DB_HOST'],
+        port=int(os.getenv('DB_PORT', '4000')),
+        database=os.environ['DB_NAME']
     )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        'pool_pre_ping': True
+    }
+    
     MAX_CONTENT_LENGTH = 16 * 1024 * 1024
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'static/uploads')
